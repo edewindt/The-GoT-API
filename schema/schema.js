@@ -190,51 +190,76 @@ const RootMutationType = new GraphQLObjectType({
             title:args.title,
             familyid:args.familyid,
         })
+        return character.save();
         }
     },
     addFamily:{
         type:FamilyType,
         description:"Add a family",
         args:{
-            house: String,
-            region: String,
-            sigil: String,
-            blazon: String,
-            seat: String,
-            origin: String,
-            notes: String
+            house: {type: new GraphQLNonNull(GraphQLString)},
+            region: {type: new GraphQLNonNull(GraphQLString)},
+            sigil: {type: new GraphQLNonNull(GraphQLString)},
+            blazon: {type: new GraphQLNonNull(GraphQLString)},
+            seat: {type: new GraphQLNonNull(GraphQLString)},
+            words:{type:GraphQLString},
+            origin: {type:GraphQLString},
+            notes: {type:GraphQLString}
         },
         resolve(parent, args){
-            
+        let family = new Family({
+            house:args.house,
+            region:args.region,
+            sigil:args.sigil,
+            blazon:args.blazon,
+            seat:args.seat,
+            origin:args.origin,
+            notes:args.notes,
+        })
+        return family.save()
         }
     },
     addMedia:{
         type:MediaType,
         description:"Add media for a character",
         args:{
-            image: String,
-            gif: String,
-            poster: String,
-            wallpaper: String,
-            art: String,
-            authid:String
+            image: {type: new GraphQLNonNull(GraphQLString)},
+            gif: {type: new GraphQLNonNull(GraphQLString)},
+            poster: {type:GraphQLString},
+            wallpaper: {type:GraphQLString},
+            art: {type:GraphQLString},
+            authid:{type: new GraphQLNonNull(GraphQLString)}
         },
         resolve(parent, args){
-            
-        }
+        let media = new Media({ 
+            image: args.image,
+            gif: args.gif,
+            poster: args.poster,
+            wallpaper: args.wallpaper,
+            art: args.art,
+            authid:args.authid
+       })
+       return media.save()
+    }
     },
     addQuote:{
         type:QuoteType,
         description:"Add a quote",
         args:{
-            body: String,
-            episode: Number,
-            season: Number,
-            authid: String,
+            body: {type: new GraphQLNonNull(GraphQLString)},
+            episode: {type:new GraphQLNonNull(GraphQLInt)},
+            season: {type: new GraphQLNonNull(GraphQLInt)},
+            authid: {type: new GraphQLNonNull(GraphQLString)},
         },
         resolve(parent, args){
-            
-        }
+        let quote = new Quote({ 
+            body: args.body,
+            episode: args.episode,
+            season: args.season,
+            authid: args.authid,
+        })
+        return quote.save()
+    }
     }
     })
 })

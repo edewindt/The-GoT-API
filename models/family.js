@@ -7,6 +7,7 @@ const familySchema = new Schema({
   sigil: String,
   blazon: String,
   seat: String,
+  words:String,
   origin: String,
   notes: String
 });
