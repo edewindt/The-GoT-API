@@ -102,6 +102,9 @@ const RootQueryType = new GraphQLObjectType({
         description:"A Single Character",
         args:{
         id:{ type: GraphQLString}
+        },
+        resolve(parent, args){
+            return Character.findById(args.id)
         }
     },
     characters:{
@@ -116,6 +119,9 @@ const RootQueryType = new GraphQLObjectType({
         description:"A Single Family or House",
         args:{
         id:{ type: GraphQLString}
+        },
+        resolve(parent, args){
+            return Family.findById(args.id);
         }
     },
     families:{
@@ -127,9 +133,12 @@ const RootQueryType = new GraphQLObjectType({
     },
     media:{
         type:MediaType,
-        description:"Media for a single Character",
+        description:"One group of Media for a single Character",
         args:{
         id:{ type: GraphQLString}
+        },
+        resolve(parent, args){
+            return Media.findById(args.id)
         }
     },
     medias:{
@@ -144,6 +153,9 @@ const RootQueryType = new GraphQLObjectType({
         description:"A Single Quote",
         args:{
         id:{ type: GraphQLString}
+        },
+        resolve(parent, args){
+            return Quote.findById(args.id)
         }
     },
     quotes:{
