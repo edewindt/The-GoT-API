@@ -7,7 +7,8 @@ const { GraphQLObjectType,
   GraphQLNonNull,
   GraphQLString,
   GraphQLList,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLSchema
 } = graphql
 
 const CharacterType = new GraphQLObjectType({
@@ -262,4 +263,8 @@ const RootMutationType = new GraphQLObjectType({
     }
     }
     })
+})
+module.exports = new GraphQLSchema({
+    query: RootQueryType,
+    mutation: RootMutationType
 })
