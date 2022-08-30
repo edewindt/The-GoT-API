@@ -5,7 +5,12 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express();
 app.use(cors())
-
-app.listen(process.env.PORT, () =>{
+mongoose.connect(process.env.MONGO_URI).then(()=>{
+    app.listen(process.env.PORT, () =>{
     console.log("Server is working. PORT " + process.env.PORT)
 })
+})
+.catch((error)=>{
+    console.log(error)
+})
+
