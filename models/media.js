@@ -7,7 +7,7 @@ const mediaSchema = new Schema({
   poster: String,
   wallpaper: String,
   art: String,
-  authid:String
+  authid: String,
 });
 
 module.exports = mongoose.model("Media", mediaSchema);

@@ -7,9 +7,9 @@ const familySchema = new Schema({
   sigil: String,
   blazon: String,
   seat: String,
-  words:String,
+  words: String,
   origin: String,
-  notes: String
+  notes: String,
 });
 
 module.exports = mongoose.model("Family", familySchema);
