@@ -14,7 +14,7 @@ const CharacterType = new GraphQLObjectType({
     name:"Character",
     description:"Describes a Character",
     fields: () => ({
-    id:{type: new GraphQLNonNull(GraphQLString)},
+    id: {type: new GraphQLNonNull(GraphQLString)},
     firstname: {type: new GraphQLNonNull(GraphQLString)},
     lastname: {type: new GraphQLNonNull(GraphQLString)},
     fullname: {type: new GraphQLNonNull(GraphQLString)},
@@ -45,6 +45,7 @@ const FamilyType = new GraphQLObjectType({
     name: "Family",
     description: "Describes a House or Family",
     fields: () =>({
+    id: {type: new GraphQLNonNull(GraphQLString)},
     house: {type: new GraphQLNonNull(GraphQLString)},
     region: {type: new GraphQLNonNull(GraphQLString)},
     sigil: {type: new GraphQLNonNull(GraphQLString)},
@@ -53,7 +54,12 @@ const FamilyType = new GraphQLObjectType({
     words:{type: GraphQLString},
     origin: {type: GraphQLString},
     notes: {type: GraphQLString},
-    //characters: {type: new GraphQLList()}
+    characters: {
+        type: new GraphQLList(CharacterType),
+        resolve:(parent, args) => {
+        return Character.find({familyid: parent.id})
+        }
+    }
 })
 })
 
