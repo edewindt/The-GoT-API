@@ -176,11 +176,11 @@ const RootMutationType = new GraphQLObjectType({
         type:CharacterType,
         description:"Add a character",
         args:{
-            firstname: String,
-            lastname: String,
-            fullname: String,
-            title: String,
-            familyid:String,
+            firstname: {type: new GraphQLNonNull(GraphQLString)},
+            lastname: {type: new GraphQLNonNull(GraphQLString)},
+            fullname: {type: new GraphQLNonNull(GraphQLString)},
+            title: {type: new GraphQLNonNull(GraphQLString)},
+            familyid: {type: new GraphQLNonNull(GraphQLString)},
         },
         resolve(parent, args){
         let character = new Character({
