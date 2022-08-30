@@ -3,7 +3,12 @@ const Family = require("../models/character")
 const Media = require("../models/media")
 const Quote = require("../models/quote")
 const graphql = require('graphql')
-const { GraphQLObjectType, GraphQLNonNull, GraphQLString } = graphql
+const { GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLList,
+  GraphQLInt
+} = graphql
 
 const CharacterType = new GraphQLObjectType({
     name:"Character",
@@ -17,7 +22,7 @@ const CharacterType = new GraphQLObjectType({
 //   quoteid:String,
 //   familyid:String,
 //   mediaid:String,
-    })
+})
 })
 
 const FamilyType = new GraphQLObjectType({
@@ -31,6 +36,93 @@ const FamilyType = new GraphQLObjectType({
     seat: {type: new GraphQLNonNull(GraphQLString)},
     words:{type: GraphQLString},
     origin: {type: GraphQLString},
-    notes: {type: GraphQLString}
+    notes: {type: GraphQLString},
+    //characters: {type: new GraphQLList()}
 })
+})
+
+const MediaType = new GraphQLObjectType({
+    name:"Media",
+    description:"Includes links to various Media",
+    fields: () =>({
+    image: {type: new GraphQLNonNull(GraphQLString)},
+    gif: {type: new GraphQLNonNull(GraphQLString)},
+    poster: {type: GraphQLString},
+    wallpaper: {type: GraphQLString},
+    art: {type: GraphQLString}
+})
+})
+
+const QuoteType = new GraphQLObjectType({
+    name:"Quote",
+    description:"Describes a Quote",
+    fields: () =>({
+    body: {type: new GraphQLNonNull(GraphQLString)},
+    episode: {type: GraphQLInt},
+    season: {type: GraphQLInt},
+    author: {type: new GraphQLNonNull(GraphQLString)}
+})
+})
+
+const RootQueryType = new GraphQLObjectType({
+    name: "RootQueryType",
+    description:"The Root Query",
+    fields: {
+    character:{
+        type:CharacterType,
+        description:"A Single Character",
+        args:{
+        id:{ type: GraphQLString}
+        }
+    },
+    characters:{
+        type:new GraphQLList(CharacterType),
+        description:"A list of all characters",
+        resolve(parent, args){
+
+        }
+    },
+    family:{
+        type:FamilyType,
+        description:"A Single Family or House",
+        args:{
+        id:{ type: GraphQLString}
+        }
+    },
+    families:{
+        type:new GraphQLList(FamilyType),
+        description:"A list of all families",
+        resolve(parent, args){
+            
+        }
+    },
+    media:{
+        type:MediaType,
+        description:"Media for a single Character",
+        args:{
+        id:{ type: GraphQLString}
+        }
+    },
+    medias:{
+        type:new GraphQLList(MediaType),
+        description:"A list of all media",
+        resolve(parent, args){
+            
+        }
+    },
+    quote:{
+        type:QuoteType,
+        description:"A Single Quote",
+        args:{
+        id:{ type: GraphQLString}
+        }
+    },
+    quotes:{
+        type:new GraphQLList(QuoteType),
+        description:"A list of all quotes",
+        resolve(parent, args){
+            
+        }
+    }
+    }
 })
