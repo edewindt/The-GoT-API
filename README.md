@@ -5,7 +5,7 @@ consume API data from a REST API. Fastforward to today, and now I
 can build my own API from scratch, which has led me and motivated
 me to create this.
 
-# # Inspirations for this project
+## Inspirations for this project
 
 A close friend is truly the reason for this project, without
 them, I would have had far less of a reason to create this
