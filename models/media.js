@@ -6,7 +6,8 @@ const mediaSchema = new Schema({
   gif: String,
   poster: String,
   wallpaper: String,
-  art: String
+  art: String,
+  authid:String
 });
 
 module.exports = mongoose.model("Media", mediaSchema);

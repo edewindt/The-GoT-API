@@ -19,9 +19,25 @@ const CharacterType = new GraphQLObjectType({
     lastname: {type: new GraphQLNonNull(GraphQLString)},
     fullname: {type: new GraphQLNonNull(GraphQLString)},
     title: {type: new GraphQLNonNull(GraphQLString)},
-//   quoteid:String,
-//   familyid:String,
-//   mediaid:String,
+    quotes:{
+        type: new GraphQLList(QuoteType),
+        resolve: (parent, args) => {
+        return Quote.find({authid: parent.id})
+        }
+    },
+    family:{
+        type: FamilyType,
+        resolve: (parent, args) => {
+        return Family.findById(parent.familyid)
+        }
+
+    },
+    media:{
+        type: MediaType,
+        resolve: (parent, args) => {
+        return Media.find({authid: parent.id})
+        }
+    }
 })
 })
 
@@ -142,8 +158,8 @@ const RootMutationType = new GraphQLObjectType({
         }
     },
     addFamily:{
-        type:,
-        description:,
+        type:FamilyType,
+        description:"Add a family",
         args:{
 
         },
@@ -152,8 +168,8 @@ const RootMutationType = new GraphQLObjectType({
         }
     },
     addMedia:{
-        type:,
-        description:,
+        type:MediaType,
+        description:"Add media for a character",
         args:{
 
         },
@@ -162,8 +178,8 @@ const RootMutationType = new GraphQLObjectType({
         }
     },
     addQuote:{
-        type:,
-        description:,
+        type:QuoteType,
+        description:"Add a quote",
         args:{
 
         },

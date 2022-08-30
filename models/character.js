@@ -6,9 +6,7 @@ const characterSchema = new Schema({
   lastname: String,
   fullname: String,
   title: String,
-  quoteid:String,
   familyid:String,
-  mediaid:String,
 });
 
 module.exports = mongoose.model("Character",characterSchema);
