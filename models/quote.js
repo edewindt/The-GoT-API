@@ -5,7 +5,8 @@ const quoteSchema = new Schema({
   body: String,
   episode: Number,
   season: Number,
-  author: String 
+  author: String,
+  authid: String,
 });
 
 module.exports = mongoose.model("Quote", quoteSchema);

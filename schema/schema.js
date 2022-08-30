@@ -126,3 +126,50 @@ const RootQueryType = new GraphQLObjectType({
     }
     }
 })
+
+const RootMutationType = new GraphQLObjectType({
+    name: "Mutation",
+    description: "The Root Mutation",
+    fields: () => ({
+    addCharacter:{
+        type:CharacterType,
+        description:"Add a character",
+        args:{
+            
+        },
+        resolve(parent, args){
+
+        }
+    },
+    addFamily:{
+        type:,
+        description:,
+        args:{
+
+        },
+        resolve(parent, args){
+            
+        }
+    },
+    addMedia:{
+        type:,
+        description:,
+        args:{
+
+        },
+        resolve(parent, args){
+            
+        }
+    },
+    addQuote:{
+        type:,
+        description:,
+        args:{
+
+        },
+        resolve(parent, args){
+            
+        }
+    }
+    })
+})
