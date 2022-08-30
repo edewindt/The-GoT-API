@@ -111,7 +111,7 @@ const RootQueryType = new GraphQLObjectType({
         type:new GraphQLList(CharacterType),
         description:"A list of all characters",
         resolve(parent, args){
-
+            return Character.find({})
         }
     },
     family:{
@@ -128,7 +128,7 @@ const RootQueryType = new GraphQLObjectType({
         type:new GraphQLList(FamilyType),
         description:"A list of all families",
         resolve(parent, args){
-            
+            return Family.find({})
         }
     },
     media:{
@@ -145,7 +145,7 @@ const RootQueryType = new GraphQLObjectType({
         type:new GraphQLList(MediaType),
         description:"A list of all media",
         resolve(parent, args){
-            
+            return Media.find({})
         }
     },
     quote:{
@@ -162,7 +162,7 @@ const RootQueryType = new GraphQLObjectType({
         type:new GraphQLList(QuoteType),
         description:"A list of all quotes",
         resolve(parent, args){
-            
+            return Quote.find({})
         }
     }
     }
@@ -176,17 +176,33 @@ const RootMutationType = new GraphQLObjectType({
         type:CharacterType,
         description:"Add a character",
         args:{
-            
+            firstname: String,
+            lastname: String,
+            fullname: String,
+            title: String,
+            familyid:String,
         },
         resolve(parent, args){
-
+        let character = new Character({
+            firstname:args.firstname,
+            lastname:args.lastname,
+            fullname:args.fullname,
+            title:args.title,
+            familyid:args.familyid,
+        })
         }
     },
     addFamily:{
         type:FamilyType,
         description:"Add a family",
         args:{
-
+            house: String,
+            region: String,
+            sigil: String,
+            blazon: String,
+            seat: String,
+            origin: String,
+            notes: String
         },
         resolve(parent, args){
             
@@ -196,7 +212,12 @@ const RootMutationType = new GraphQLObjectType({
         type:MediaType,
         description:"Add media for a character",
         args:{
-
+            image: String,
+            gif: String,
+            poster: String,
+            wallpaper: String,
+            art: String,
+            authid:String
         },
         resolve(parent, args){
             
@@ -206,7 +227,10 @@ const RootMutationType = new GraphQLObjectType({
         type:QuoteType,
         description:"Add a quote",
         args:{
-
+            body: String,
+            episode: Number,
+            season: Number,
+            authid: String,
         },
         resolve(parent, args){
             
