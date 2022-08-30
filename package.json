@@ -1,5 +1,5 @@
 {
-  "name": "GoT API",
+  "name": "GoT_API",
   "version": "1.0.0",
   "description": "This is a public open source, graphql REST API for Game Of Thrones",
   "main": "server.js",
