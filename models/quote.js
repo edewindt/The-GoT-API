@@ -5,7 +5,6 @@ const quoteSchema = new Schema({
   body: String,
   episode: Number,
   season: Number,
-  author: String,
   authid: String,
 });
 

@@ -64,6 +64,7 @@ const FamilyType = new GraphQLObjectType({
 })
 
 const MediaType = new GraphQLObjectType({
+    id: {type: new GraphQLNonNull(GraphQLString)},
     name:"Media",
     description:"Includes links to various Media",
     fields: () =>({
@@ -76,13 +77,19 @@ const MediaType = new GraphQLObjectType({
 })
 
 const QuoteType = new GraphQLObjectType({
+    id: {type: new GraphQLNonNull(GraphQLString)},
     name:"Quote",
     description:"Describes a Quote",
     fields: () =>({
     body: {type: new GraphQLNonNull(GraphQLString)},
     episode: {type: GraphQLInt},
     season: {type: GraphQLInt},
-    author: {type: new GraphQLNonNull(GraphQLString)}
+    author: {
+        type: CharacterType,
+        resolve: (parent, args) =>{
+        return Author.findById(parent.authid)
+        }
+    }
 })
 })
 
