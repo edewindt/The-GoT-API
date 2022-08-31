@@ -54,7 +54,6 @@ const FamilyType = new GraphQLObjectType({
     seat: { type: new GraphQLNonNull(GraphQLString) },
     words: { type: GraphQLString },
     origin: { type: GraphQLString },
-    notes: { type: GraphQLString },
     characters: {
       type: new GraphQLList(CharacterType),
       resolve: (parent, args) => {
@@ -88,7 +87,7 @@ const QuoteType = new GraphQLObjectType({
     author: {
       type: CharacterType,
       resolve: (parent, args) => {
-        return Author.findById(parent.authid);
+        return Character.findById(parent.authid);
       },
     },
   }),
@@ -205,7 +204,6 @@ const RootMutationType = new GraphQLObjectType({
         seat: { type: new GraphQLNonNull(GraphQLString) },
         words: { type: GraphQLString },
         origin: { type: GraphQLString },
-        notes: { type: GraphQLString },
       },
       resolve(parent, args) {
         let family = new Family({
@@ -214,8 +212,8 @@ const RootMutationType = new GraphQLObjectType({
           sigil: args.sigil,
           blazon: args.blazon,
           seat: args.seat,
+          words: args.words,
           origin: args.origin,
-          notes: args.notes,
         });
         return family.save();
       },
