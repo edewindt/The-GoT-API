@@ -1,0 +1,5 @@
+*.env
+*.md
+.gitignore
+.prettierc.json
+.node_modules
