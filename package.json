@@ -4,6 +4,7 @@
   "description": "This is a public open source, graphql REST API for Game Of Thrones",
   "main": "server.js",
   "scripts": {
+    "start": "node server",
     "dev": "nodemon server"
   },
   "keywords": [],
