@@ -16,4 +16,4 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-app.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
+app.all("*", graphqlHTTP({ schema, graphiql: true }));
