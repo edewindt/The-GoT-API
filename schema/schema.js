@@ -34,7 +34,7 @@ const CharacterType = new GraphQLObjectType({
       },
     },
     media: {
-      type: MediaType,
+      type: new GraphQLList(MediaType),
       resolve: (parent, args) => {
         return Media.find({ authid: parent.id });
       },
@@ -73,6 +73,12 @@ const MediaType = new GraphQLObjectType({
     poster: { type: GraphQLString },
     wallpaper: { type: GraphQLString },
     art: { type: GraphQLString },
+    character: {
+      type: CharacterType,
+      resolve: (parent, args) => {
+        return Character.findById(parent.authid);
+      },
+    },
   }),
 });
 
