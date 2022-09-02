@@ -64,10 +64,10 @@ const FamilyType = new GraphQLObjectType({
 });
 
 const MediaType = new GraphQLObjectType({
-  id: { type: new GraphQLNonNull(GraphQLString) },
   name: "Media",
   description: "Includes links to various Media",
   fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
     image: { type: new GraphQLNonNull(GraphQLString) },
     gif: { type: new GraphQLNonNull(GraphQLString) },
     poster: { type: GraphQLString },
@@ -83,10 +83,10 @@ const MediaType = new GraphQLObjectType({
 });
 
 const QuoteType = new GraphQLObjectType({
-  id: { type: new GraphQLNonNull(GraphQLString) },
   name: "Quote",
   description: "Describes a Quote",
   fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
     body: { type: new GraphQLNonNull(GraphQLString) },
     episode: { type: GraphQLInt },
     season: { type: GraphQLInt },
