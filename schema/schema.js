@@ -113,6 +113,16 @@ const RootQueryType = new GraphQLObjectType({
         return Character.findById(args.id);
       },
     },
+    searchChar: {
+      type: CharacterType,
+      description: "Search for character directly",
+      args: {
+        firstname: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Character.findOne({ firstname: args.firstname });
+      },
+    },
     characters: {
       type: new GraphQLList(CharacterType),
       description: "A list of all characters",
