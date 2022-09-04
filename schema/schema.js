@@ -3,6 +3,7 @@ const Character = require("../models/character");
 const Family = require("../models/family");
 const Media = require("../models/media");
 const Quote = require("../models/quote");
+const Feedback = require("../models/feedback");
 const {
   GraphQLObjectType,
   GraphQLNonNull,
@@ -42,6 +43,15 @@ const CharacterType = new GraphQLObjectType({
   }),
 });
 
+const FeedbackType = new GraphQLObjectType({
+  name: "Feedback",
+  description: "Feedback from feedback form",
+  fields: () => ({
+    username: { type: new GraphQLNonNull(GraphQLString) },
+    body: { type: new GraphQLNonNull(GraphQLString) },
+    contact: { type: new GraphQLNonNull(GraphQLString) },
+  }),
+});
 const FamilyType = new GraphQLObjectType({
   name: "Family",
   description: "Describes a House or Family",
@@ -188,94 +198,111 @@ const RootMutationType = new GraphQLObjectType({
   name: "Mutation",
   description: "The Root Mutation",
   fields: () => ({
-    addCharacter: {
-      type: CharacterType,
-      description: "Add a character",
+    // addCharacter: {
+    //   type: CharacterType,
+    //   description: "Add a character",
+    //   args: {
+    //     firstname: { type: new GraphQLNonNull(GraphQLString) },
+    //     lastname: { type: new GraphQLNonNull(GraphQLString) },
+    //     fullname: { type: new GraphQLNonNull(GraphQLString) },
+    //     title: { type: new GraphQLNonNull(GraphQLString) },
+    //     familyid: { type: new GraphQLNonNull(GraphQLString) },
+    //   },
+    //   resolve(parent, args) {
+    //     let character = new Character({
+    //       firstname: args.firstname,
+    //       lastname: args.lastname,
+    //       fullname: args.fullname,
+    //       title: args.title,
+    //       familyid: args.familyid,
+    //     });
+    //     return character.save();
+    //   },
+    // },
+    // addFamily: {
+    //   type: FamilyType,
+    //   description: "Add a family",
+    //   args: {
+    //     house: { type: new GraphQLNonNull(GraphQLString) },
+    //     region: { type: new GraphQLNonNull(GraphQLString) },
+    //     sigil: { type: new GraphQLNonNull(GraphQLString) },
+    //     blazon: { type: new GraphQLNonNull(GraphQLString) },
+    //     seat: { type: new GraphQLNonNull(GraphQLString) },
+    //     words: { type: GraphQLString },
+    //     origin: { type: GraphQLString },
+    //   },
+    //   resolve(parent, args) {
+    //     let family = new Family({
+    //       house: args.house,
+    //       region: args.region,
+    //       sigil: args.sigil,
+    //       blazon: args.blazon,
+    //       seat: args.seat,
+    //       words: args.words,
+    //       origin: args.origin,
+    //     });
+    //     return family.save();
+    //   },
+    // },
+    // addMedia: {
+    //   type: MediaType,
+    //   description: "Add media for a character",
+    //   args: {
+    //     image: { type: new GraphQLNonNull(GraphQLString) },
+    //     gif: { type: new GraphQLNonNull(GraphQLString) },
+    //     poster: { type: GraphQLString },
+    //     wallpaper: { type: GraphQLString },
+    //     art: { type: GraphQLString },
+    //     authid: { type: new GraphQLNonNull(GraphQLString) },
+    //   },
+    //   resolve(parent, args) {
+    //     let media = new Media({
+    //       image: args.image,
+    //       gif: args.gif,
+    //       poster: args.poster,
+    //       wallpaper: args.wallpaper,
+    //       art: args.art,
+    //       authid: args.authid,
+    //     });
+    //     return media.save();
+    //   },
+    // },
+    feedBack: {
+      type: FeedbackType,
+      description: "Feedback",
       args: {
-        firstname: { type: new GraphQLNonNull(GraphQLString) },
-        lastname: { type: new GraphQLNonNull(GraphQLString) },
-        fullname: { type: new GraphQLNonNull(GraphQLString) },
-        title: { type: new GraphQLNonNull(GraphQLString) },
-        familyid: { type: new GraphQLNonNull(GraphQLString) },
-      },
-      resolve(parent, args) {
-        let character = new Character({
-          firstname: args.firstname,
-          lastname: args.lastname,
-          fullname: args.fullname,
-          title: args.title,
-          familyid: args.familyid,
-        });
-        return character.save();
-      },
-    },
-    addFamily: {
-      type: FamilyType,
-      description: "Add a family",
-      args: {
-        house: { type: new GraphQLNonNull(GraphQLString) },
-        region: { type: new GraphQLNonNull(GraphQLString) },
-        sigil: { type: new GraphQLNonNull(GraphQLString) },
-        blazon: { type: new GraphQLNonNull(GraphQLString) },
-        seat: { type: new GraphQLNonNull(GraphQLString) },
-        words: { type: GraphQLString },
-        origin: { type: GraphQLString },
-      },
-      resolve(parent, args) {
-        let family = new Family({
-          house: args.house,
-          region: args.region,
-          sigil: args.sigil,
-          blazon: args.blazon,
-          seat: args.seat,
-          words: args.words,
-          origin: args.origin,
-        });
-        return family.save();
-      },
-    },
-    addMedia: {
-      type: MediaType,
-      description: "Add media for a character",
-      args: {
-        image: { type: new GraphQLNonNull(GraphQLString) },
-        gif: { type: new GraphQLNonNull(GraphQLString) },
-        poster: { type: GraphQLString },
-        wallpaper: { type: GraphQLString },
-        art: { type: GraphQLString },
-        authid: { type: new GraphQLNonNull(GraphQLString) },
-      },
-      resolve(parent, args) {
-        let media = new Media({
-          image: args.image,
-          gif: args.gif,
-          poster: args.poster,
-          wallpaper: args.wallpaper,
-          art: args.art,
-          authid: args.authid,
-        });
-        return media.save();
-      },
-    },
-    addQuote: {
-      type: QuoteType,
-      description: "Add a quote",
-      args: {
+        username: { type: new GraphQLNonNull(GraphQLString) },
         body: { type: new GraphQLNonNull(GraphQLString) },
-        episode: { type: new GraphQLNonNull(GraphQLInt) },
-        season: { type: new GraphQLNonNull(GraphQLInt) },
-        authid: { type: new GraphQLNonNull(GraphQLString) },
+        contact: { type: GraphQLString },
       },
       resolve(parent, args) {
-        let quote = new Quote({
+        let feedback = new Feedback({
+          username: args.username,
           body: args.body,
-          episode: args.episode,
-          season: args.season,
-          authid: args.authid,
+          contact: args.contact,
         });
-        return quote.save();
+        return feedback.save();
       },
     },
+    // addQuote: {
+    //   type: QuoteType,
+    //   description: "Add a quote",
+    //   args: {
+    //     body: { type: new GraphQLNonNull(GraphQLString) },
+    //     episode: { type: new GraphQLNonNull(GraphQLInt) },
+    //     season: { type: new GraphQLNonNull(GraphQLInt) },
+    //     authid: { type: new GraphQLNonNull(GraphQLString) },
+    //   },
+    //   resolve(parent, args) {
+    //     let quote = new Quote({
+    //       body: args.body,
+    //       episode: args.episode,
+    //       season: args.season,
+    //       authid: args.authid,
+    //     });
+    //     return quote.save();
+    //   },
+    // },
   }),
 });
 module.exports = new GraphQLSchema({
