@@ -49,7 +49,7 @@ const FeedbackType = new GraphQLObjectType({
   fields: () => ({
     username: { type: new GraphQLNonNull(GraphQLString) },
     body: { type: new GraphQLNonNull(GraphQLString) },
-    contact: { type: new GraphQLNonNull(GraphQLString) },
+    contact: { type: GraphQLString },
   }),
 });
 const FamilyType = new GraphQLObjectType({
