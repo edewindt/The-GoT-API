@@ -244,29 +244,29 @@ const RootMutationType = new GraphQLObjectType({
     //     return family.save();
     //   },
     // },
-    // addMedia: {
-    //   type: MediaType,
-    //   description: "Add media for a character",
-    //   args: {
-    //     image: { type: new GraphQLNonNull(GraphQLString) },
-    //     gif: { type: new GraphQLNonNull(GraphQLString) },
-    //     poster: { type: GraphQLString },
-    //     wallpaper: { type: GraphQLString },
-    //     art: { type: GraphQLString },
-    //     authid: { type: new GraphQLNonNull(GraphQLString) },
-    //   },
-    //   resolve(parent, args) {
-    //     let media = new Media({
-    //       image: args.image,
-    //       gif: args.gif,
-    //       poster: args.poster,
-    //       wallpaper: args.wallpaper,
-    //       art: args.art,
-    //       authid: args.authid,
-    //     });
-    //     return media.save();
-    //   },
-    // },
+    addMedia: {
+      type: MediaType,
+      description: "Add media for a character",
+      args: {
+        image: { type: new GraphQLNonNull(GraphQLString) },
+        gif: { type: new GraphQLNonNull(GraphQLString) },
+        poster: { type: GraphQLString },
+        wallpaper: { type: GraphQLString },
+        art: { type: GraphQLString },
+        authid: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        let media = new Media({
+          image: args.image,
+          gif: args.gif,
+          poster: args.poster,
+          wallpaper: args.wallpaper,
+          art: args.art,
+          authid: args.authid,
+        });
+        return media.save();
+      },
+    },
     feedBack: {
       type: FeedbackType,
       description: "Feedback",
